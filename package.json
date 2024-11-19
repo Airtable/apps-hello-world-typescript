@@ -1,23 +1,30 @@
 {
-    "name": "@airtable/hello-world-typescript-app",
-    "version": "2.0.6",
-    "description": "A typescript version of a hello world app",
-    "author": "",
-    "license": "MIT",
-    "scripts": {
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx frontend"
-    },
-    "dependencies": {
-        "@airtable/blocks": "latest",
-        "react": "^16.9.0",
-        "react-dom": "^16.9.0"
-    },
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^3.0.2",
-        "@typescript-eslint/parser": "^2.15.0",
-        "eslint": "^6.3.0",
-        "eslint-plugin-react": "^7.14.3",
-        "eslint-plugin-react-hooks": "^2.0.1",
-        "typescript": "^3.9.3"
-    }
+  "name": "marketing-cloud-ui",
+  "version": "0.0.1",
+  "description": "A typescript version of a hello world app",
+  "author": "Viktor Honcharov",
+  "license": "ISC",
+  "scripts": {
+    "start": "npm run block run",
+    "release": "npm run block release",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx frontend",
+    "block": "./node_modules/@airtable/blocks-cli/bin/run"
+  },
+  "dependencies": {
+    "@airtable/blocks": "1.18.2",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@airtable/blocks-cli": "^2.0.5",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0"
+  }
 }
