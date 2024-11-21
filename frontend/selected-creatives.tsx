@@ -28,9 +28,9 @@ export default function SelectedCreatives({base, table}) {
   return (
     <Grid container spacing={2}>
       <Grid size={12}>
-        <Typography variant="h6" component="div">
+        <p>
           Selected Creatives ({cursor.selectedRecordIds.length})
-        </Typography>
+        </p>
       </Grid>
       <Grid size={12}>
         <List>

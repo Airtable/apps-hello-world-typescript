@@ -8,6 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import CreateCreativeAutomatedRefresh from "./create-creative-automated-refresh";
+import CreateCreativeAutomatedVersion from "./create-creative-automated-version";
 
 export default function AutomaitionList({base, table}) {
   return (
@@ -25,6 +26,18 @@ export default function AutomaitionList({base, table}) {
         </AccordionSummary>
         <AccordionDetails>
           <CreateCreativeAutomatedRefresh base={base} table={table}/>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="create-creative-automated-version-content"
+          id="create-creative-automated-version-header"
+        >
+          To automatically create creative technical tasks for the version creative type
+        </AccordionSummary>
+        <AccordionDetails>
+          <CreateCreativeAutomatedVersion base={base} table={table}/>
         </AccordionDetails>
       </Accordion>
     </Fragment>
