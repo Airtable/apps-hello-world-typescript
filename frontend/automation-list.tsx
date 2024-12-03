@@ -1,16 +1,14 @@
 import * as React from "react";
 import { Fragment } from "react";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from '@mui/material/Typography';
-import Button from "@mui/material/Button";
-import CreateCreativeAutomatedRefresh from "./create-creative-automated-refresh";
-import CreateCreativeAutomatedVersion from "./create-creative-automated-version";
+import CreateCreativeAutomatedRefresh from "./automations/create-creative-automated-refresh";
+import CreateCreativeAutomatedVersion from "./automations/create-creative-automated-version";
 
-export default function AutomaitionList({base, table}) {
+export default function AutomaitionList() {
   return (
     <Fragment>
       <Typography variant="h4">
@@ -25,7 +23,7 @@ export default function AutomaitionList({base, table}) {
           Automatically create creative technical tasks for the refresh creative type
         </AccordionSummary>
         <AccordionDetails>
-          <CreateCreativeAutomatedRefresh base={base} table={table}/>
+          <CreateCreativeAutomatedRefresh />
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -37,7 +35,7 @@ export default function AutomaitionList({base, table}) {
           To automatically create creative technical tasks for the version creative type
         </AccordionSummary>
         <AccordionDetails>
-          <CreateCreativeAutomatedVersion base={base} table={table}/>
+          <CreateCreativeAutomatedVersion />
         </AccordionDetails>
       </Accordion>
     </Fragment>

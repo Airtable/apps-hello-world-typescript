@@ -10,20 +10,22 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid2';
-import Typography from '@mui/material/Typography';
 
-function RecordListItem({table, recordId}) {
-  const record = useRecordById(table, recordId);
+function RecordListItem({view, recordId}) {
+  const record = useRecordById(view, recordId);
   return <ListItem><ListItemText primary={record.name || 'unnamaded creative'}/></ListItem>;
 }
 
-export default function SelectedCreatives({base, table}) {
+export default function SelectedCreatives() {
   const cursor = useCursor();
   // load selected records and fields
   useLoadable(cursor);
 
-  // re-render whenever the list of selected records
-  useWatchable(cursor, ["selectedRecordIds"]);
+  // re-render whenever the active Table
+  useWatchable(cursor, ["activeTableId"]);
+
+  const base = useBase();
+  const view = base.getTableById(cursor.activeTableId).getViewById(cursor.activeViewId);
 
   return (
     <Grid container spacing={2}>
@@ -35,7 +37,7 @@ export default function SelectedCreatives({base, table}) {
       <Grid size={12}>
         <List>
           {cursor.selectedRecordIds.map((recordId) => (
-            <RecordListItem key={recordId} recordId={recordId} table={table} />
+            <RecordListItem key={recordId} recordId={recordId} view={view} />
           ))}
         </List>
       </Grid>

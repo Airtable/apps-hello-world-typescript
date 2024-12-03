@@ -5,29 +5,31 @@
   "author": "Viktor Honcharov",
   "license": "ISC",
   "scripts": {
-    "start": "npm run block run",
+    "start": "concurrently -r -g \"npm run block run\" \"node proxy.mjs\"",
     "release": "npm run block release",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx frontend",
     "block": "./node_modules/@airtable/blocks-cli/bin/run"
   },
   "dependencies": {
     "@airtable/blocks": "1.18.2",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.7",
-    "@mui/material": "^6.1.7",
+    "@jsonforms/core": "^3.4.1",
+    "@jsonforms/material-renderers": "^3.4.1",
+    "@jsonforms/react": "^3.4.1",
+    "@mui/icons-material": "^6.1.9",
+    "@mui/material": "^6.1.9",
     "react": "^17.0.0",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@airtable/blocks-cli": "^2.0.5",
+    "concurrently": "^9.1.0",
     "cors": "^2.8.5",
-    "eslint": "^9.15.0",
+    "eslint": "^9.16.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "express": "^4.21.1",
     "http-proxy-middleware": "^3.0.3",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.15.0"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.16.0"
   }
 }
