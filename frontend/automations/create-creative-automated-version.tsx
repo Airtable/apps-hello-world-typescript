@@ -169,7 +169,7 @@ export default function CreateCreativeAutomatedVersion() {
     }
   };
 
-  const onClick = async () => runAutomation<object>('/creative/create-automated-version', cursor.selectedRecordIds, data, setAutomations);
+  const onClick = async () => runAutomation<object>('/creative/create-version', cursor.selectedRecordIds, data, setAutomations);
   const onChange = (formState) => {
     setData(formState.data);
     setErrors(formState.errors);
