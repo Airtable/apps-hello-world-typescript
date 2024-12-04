@@ -35,7 +35,7 @@ const uiSchema = {
   ],
 };
 
-export default function CreateCreativeAutomatedRefresh() {
+export default function CreateCreativeRefresh() {
   const cursor = useCursor();
   // load selected records and fields
   useLoadable(cursor);
