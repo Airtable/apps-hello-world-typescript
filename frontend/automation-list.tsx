@@ -13,7 +13,7 @@ import CreateCreativeOriginal from "./automations/create-creative-original";
 const list = [
   {
     key: 'create-creative-adaptation',
-    text: 'Automatically create creative technical tasks for the adapttion creative type',
+    text: 'Automatically create creative technical tasks for the adaptation creative type',
     component: <CreateCreativeAdaptation />,
   },
   {
@@ -40,7 +40,7 @@ export default function AutomaitionList() {
         Select Automation:
       </Typography>
       {list.map((automation) => (
-        <Accordion>
+        <Accordion key={automation.key}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${automation.key}-content`}

@@ -166,7 +166,8 @@ export default function CreateCreativeAutomatedVersion() {
           "required": ['name', 'attribute', 'category', 'parameter']
         }
       }
-    }
+    },
+    "required": ['createdBy']
   };
 
   const onClick = async () => runAutomation<object>('/creative/create-version', cursor.selectedRecordIds, data, setAutomations);

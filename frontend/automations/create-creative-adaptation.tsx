@@ -2,7 +2,7 @@ import * as React from "react";
 import { Fragment, useState } from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useBase, useCursor, useLoadable, useRecords, useWatchable } from "@airtable/blocks/ui";
+import { useBase, useCursor, useLoadable, useWatchable } from "@airtable/blocks/ui";
 import Grid from "@mui/material/Grid2";
 import { JsonForms } from '@jsonforms/react';
 import { materialCells } from '@jsonforms/material-renderers';
@@ -23,6 +23,16 @@ const uiSchema = {
       label: "Initials of the Creative Marketing Specialist",
       scope: "#/properties/createdBy",
     },
+    {
+      type: "Control",
+      label: "Adaptation Language",
+      scope: "#/properties/languages",
+    },
+    {
+      type: "Control",
+      label: "Adaptation Product",
+      scope: "#/properties/products",
+    },
   ],
 };
 
@@ -42,6 +52,8 @@ export default function CreateCreativeAdaptation() {
 
   // TODO: fix typing
   const assigneeField: any = base.tables.find((t) => t.name === 'Creative process').fields.find((f) => f.name === 'Created By');
+  const languageField: any = base.tables.find((t) => t.name === 'Creative process').fields.find((f) => f.name === 'Language');
+  const productField: any = base.tables.find((t) => t.name === 'Creative process').fields.find((f) => f.name === 'Product');
 
   const schema = {
     "type": "object",
@@ -49,8 +61,30 @@ export default function CreateCreativeAdaptation() {
       "createdBy": {
         "type": "string",
         "enum": assigneeField.config.options.choices.map((choice) => choice.name),
-      }
-    }
+      },
+      "languages": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "enum": languageField.config.options.choices.map((choice) => choice.name),
+        },
+      },
+      "products": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": productField.config.options.choices.map((choice) => choice.name),
+            }
+          }
+        },
+      },
+    },
+    "required": ['createdBy']
   };
 
   const onClick = async () => runAutomation<object>('/creative/create-adaptation', cursor.selectedRecordIds, data, setAutomations);

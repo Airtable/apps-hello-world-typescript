@@ -1,4 +1,4 @@
-import { materialRenderers, } from '@jsonforms/material-renderers';
+import { materialRenderers } from '@jsonforms/material-renderers';
 import blockControlTester from './block-control-tester';
 import BlockControl from './block-control';
 

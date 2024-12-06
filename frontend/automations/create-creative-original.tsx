@@ -88,7 +88,8 @@ export default function CreateCreativeOriginal() {
           "required": ['name', 'attribute', 'category', 'parameter']
         }
       }
-    }
+    },
+    "required": ['createdBy', 'blocks']
   };
 
   const onClick = async () => runAutomation<object>('/creative/create-original', cursor.selectedRecordIds, data, setAutomations);

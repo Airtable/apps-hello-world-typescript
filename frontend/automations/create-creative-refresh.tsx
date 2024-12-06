@@ -88,7 +88,8 @@ export default function CreateCreativeRefresh() {
           "required": ['name', 'attribute', 'category', 'parameter']
         }
       }
-    }
+    },
+    "required": ['createdBy', 'blocks']
   };
 
   const onClick = async () => runAutomation<object>('/creative/create-automated-refresh', cursor.selectedRecordIds, data, setAutomations);
