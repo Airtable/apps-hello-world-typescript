@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { Block } from "../types";
+import { Block } from "../automations/types";
 
 interface BlockControlProps {
   data: Block[];
@@ -29,10 +29,9 @@ function BlockControl({ data, handleChange, path, schema }: BlockControlProps) {
   const blockTable = base.tables.find((t) => t.name === "Blocks");
   const blockField = blockTable.fields.find((f) => f.name === "Block");
   const getAllowedBlocks = (block: Block) =>
-    blockField.config.options.choices
-      .filter((choice) =>
-        (schema.items.properties?.name?.enum ?? []).includes(choice.name)
-      );
+    blockField.config.options.choices.filter((choice) =>
+      (schema.items.properties?.name?.enum ?? []).includes(choice.name)
+    );
   const attributeField = blockTable.fields.find((f) => f.name === "Attribute");
   const getAllowedAttribute = (block: Block) =>
     attributeField.config.options.choices
@@ -60,6 +59,16 @@ function BlockControl({ data, handleChange, path, schema }: BlockControlProps) {
       )
       .filter((choice) =>
         (schema.items.properties?.category?.enum ?? []).includes(choice.name)
+      )
+      .filter(
+        (choice) =>
+          !Boolean(
+            blocks
+              .map((block) =>
+                [block.name, block.attribute, block.category].join("_")
+              )
+              .includes([block.name, block.attribute, choice.name].join("_"))
+          )
       );
   const blockRecords: any[] = useRecords(blockTable);
   const getAllowedParameter = (block: Block) =>
@@ -71,7 +80,9 @@ function BlockControl({ data, handleChange, path, schema }: BlockControlProps) {
           record.getCellValue("Category").name === block.category
       )
       .filter((choice) =>
-        (schema.items.properties?.parameter?.enum ?? []).includes(choice.getCellValue("Parameter"))
+        (schema.items.properties?.parameter?.enum ?? []).includes(
+          choice.getCellValue("Parameter")
+        )
       );
 
   const addBlock = () => {
@@ -153,8 +164,13 @@ function BlockControl({ data, handleChange, path, schema }: BlockControlProps) {
                   onChange={(e) =>
                     updateBlock(blockIndex, "category", e.target.value)
                   }
-                  disabled={!block.attribute}
+                  disabled={!block.attribute || (!block.category && getAllowedCategory(block).length === 0)}
                 >
+                  {block.category && (
+                    <MenuItem value={block.category}>
+                      {block.category}
+                    </MenuItem>
+                  )}
                   {getAllowedCategory(block).map((choice) => (
                     <MenuItem key={choice.id} value={choice.name}>
                       {choice.name}
