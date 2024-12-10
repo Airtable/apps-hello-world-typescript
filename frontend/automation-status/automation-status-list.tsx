@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 
 import { useRecordById } from "@airtable/blocks/ui";
 import View from "@airtable/blocks/dist/types/src/models/view";
@@ -14,19 +14,22 @@ import CircularProgress from '@mui/material/CircularProgress';
 import List from "@mui/material/List";
 
 import { Automation } from "./types";
+import { AUTOMATION_STATUS } from "./automation-status.enum";
+
+const icons: Record<AUTOMATION_STATUS, ReactNode> = {
+  [AUTOMATION_STATUS.ERROR]: <ErrorIcon />,
+  [AUTOMATION_STATUS.IN_PROGGRESS]: <CircularProgress />,
+  [AUTOMATION_STATUS.DONE]: <DoneIcon />,
+};
 
 function AutomationStatusListItem({view, automation}: {view: View, automation: Automation}) {
   const record = useRecordById(view, automation.id);
   return (
     <ListItem>
       <ListItemButton dense>
-        <ListItemIcon>
-          {automation.status === 'error' && <ErrorIcon />}
-          {automation.status === 'done' && <DoneIcon />}
-          {automation.status === 'in progress' && <CircularProgress />}
-        </ListItemIcon>
-        {(automation.status === 'done' || automation.status === 'in progress') && <ListItemText primary={record.name || automation.id} />}
-        {automation.status === 'error' && <ListItemText primary={automation.message} />}
+        <ListItemIcon>{icons[automation.status]}</ListItemIcon>
+        {[AUTOMATION_STATUS.DONE, AUTOMATION_STATUS.IN_PROGGRESS].includes(automation.status) && <ListItemText primary={record.name || automation.id} />}
+        {AUTOMATION_STATUS.ERROR === automation.status && <ListItemText primary={automation.message} />}
       </ListItemButton>
     </ListItem>
   );

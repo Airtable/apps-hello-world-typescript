@@ -1,0 +1,5 @@
+export enum AUTOMATION_STATUS {
+  ERROR = "ERROR",
+  IN_PROGGRESS = "IN_PROGGRESS",
+  DONE = "DONE",
+}

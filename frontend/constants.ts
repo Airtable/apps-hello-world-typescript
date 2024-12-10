@@ -1,2 +1,4 @@
-// export const SERVER_URL = 'http://localhost:3001';
-export const SERVER_URL = 'https://3jpqdydxoi.execute-api.us-east-1.amazonaws.com/Prod'; // stage
+import env from './env.json'
+
+export const REACT_APP_SERVER_URL = env.REACT_APP_SERVER_URL;
+export const CREATIVE_PROCESS_TABLE_NAME = 'Creative process';

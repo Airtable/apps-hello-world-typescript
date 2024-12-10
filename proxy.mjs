@@ -1,8 +1,26 @@
 import express from "express";
 import cors from "cors";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { readFileSync } from "node:fs";
+import { readFileSync, watchFile } from "node:fs";
+import { writeFile, readFile } from "node:fs/promises";
 import https from "node:https";
+import { resolve } from 'node:path';
+
+async function updateEnv() {
+  try {
+    const data = await readFile(resolve(import.meta.dirname, './env.json'));
+    const env = JSON.parse(data);
+    const filteredKeys = Object.keys(env).filter((key) => key.startsWith('REACT_APP_'));
+    const newData = {};
+    for (const key of filteredKeys) {
+      newData[key] = env[key];
+    }
+    await writeFile(resolve(import.meta.dirname, './frontend/env.json'), JSON.stringify(newData));
+  } catch (error) {}
+}
+
+await updateEnv();
+watchFile(resolve(import.meta.dirname, './env.json'), async () => await updateEnv());
 
 const port = 3002;
 const sslOptions = {

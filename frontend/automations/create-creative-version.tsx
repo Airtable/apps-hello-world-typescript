@@ -8,9 +8,9 @@ import { JsonForms } from '@jsonforms/react';
 import { materialCells } from '@jsonforms/material-renderers';
 
 import SelectedCreatives from "../selected-creatives";
-import { Automation } from "../types";
+import { Automation } from "../automation-status/types";
 import runAutomation from "../run-automation";
-import AutomationStatusList from "../automation-status-list";
+import AutomationStatusList from "../automation-status/automation-status-list";
 import renderers from "../custom-ui/renderers";
 
 const initialData = {};
